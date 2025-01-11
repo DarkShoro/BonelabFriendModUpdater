@@ -1,0 +1,83 @@
+{
+  "name": "bonelab-friends-mod-updater",
+  "productName": "BONELAB Friends Mod Updater",
+  "version": "1.0.5",
+  "description": "Application to update friends mod for BONELAB",
+  "main": "src/main.js",
+  "author": "LightShoro",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-prebuilt-compile": "8.2.0"
+  },
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "publish-windows": "electron-forge publish",
+    "publish-mac": "electron-forge publish --arch=x64",
+    "publish-git": "electron-forge publish",
+    "lint": "echo \"No linting configured\"",
+    "release": "release-it"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "lib/icons/icon",
+        "asar": true
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "bonelabfriendsmodupdater",
+            "authors": "LightShoro",
+            "loadingGif": "./lib/splash.gif",
+            "iconUrl": "https://cdn.eradium.fr/BONELAB/icon.ico",
+            "setupIcon": "./lib/icons/icon.ico"
+          }
+        }
+      ]
+    }
+  },
+  "build": {
+    "extraResources": [
+      {
+        "from": "./lib/",
+        "to": "lib",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "asar": true,
+    "appId": "fr.lightshoro.bonelabfriendsmodupdater",
+    "productName": "BONELAB Friends Mod Updater",
+    "copyright": "Copyright © 2024 ${author}",
+    "mac": {
+      "icon": "./lib/icons/icon.icns",
+      "category": "public.app-category.games",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "icon": "./lib/icons/icon.png"
+    },
+    "directories": {
+      "buildResources": "lib"
+    }
+  },
+  "dependencies": {
+    "@electron-forge/cli": "^7.6.0",
+    "@electron-forge/maker-squirrel": "^7.6.0",
+    "adm-zip": "^0.5.16",
+    "axios": "^1.7.9",
+    "ejs": "^3.1.10",
+    "ejs-electron": "^3.0.0",
+    "gunzip-maybe": "^1.4.2",
+    "jquery": "^3.7.1",
+    "tar-fs": "^3.0.6"
+  }
+}

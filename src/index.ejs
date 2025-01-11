@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BONELAB | Friends Mod Updater</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/modules/binder.js"></script>
+</head>
+
+<body bonelabPath="<%= bonelabPath %>">
+    <div class="goober"></div>
+    <div class="container flex justify-center items-center h-screen">
+
+        <div class="text-center align-middle">
+            <h1 class="text-4xl font-bold">BONELAB | Friends Mod Updater</h1>
+            <p class="text-lg">Outils de mise à jour du pack de mods BONELAB du UwU Gang</p>
+
+            <div class="state">
+                <p class="text-lg">BONELAB: <span id="bonelabstate">...</span></p>
+            </div>
+
+
+            <div id="bars" class="hidden">
+
+                <div id="dlBar">
+                    <span class="text-lg"> Téléchargement:</span>
+                    <div class="progress" id="progress">
+                        <div class="bar" style="width:0%" id="progressBar">
+                            <p class="percent" id="progressPercent">0%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="unpackBar">
+                    <span class="text-lg"> Décompression:</span>
+                    <div class="progress mt-5" id="progressUnpack">
+                        <div class="bar" style="width:0%" id="progressBarUnpack">
+                            <p class="percent" id="progressPercentUnpack">0%</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex justify-center items-center mt-5" id="buttons">
+
+                <button class="button-anon-pen" id="downloadButton">
+                    <span class="button-text">Mettre à jour</span>
+                </button>
+
+                <button class="button-anon-pen" id="changeLocationButton">
+                    <span class="button-text">Changer d'emplacement</span>
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script>window.$ = window.jQuery = require('jquery');</script>
+<script src="assets/js/script.js"></script>
+
+</html>
