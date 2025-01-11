@@ -203,8 +203,6 @@ function startDownload(event) {
                 totalSize += jsonInfo.melon.plugins[i].size;
             }
 
-            var userHome = os.userInfo().homedir
-
             console.log('Total Size to download: ' + totalSize + ' bytes');
 
             let downloadedSize = 0;
@@ -227,10 +225,9 @@ function startDownload(event) {
                 let size = file.size;
 
                 let filePath = '';
-                var userHome = os.userInfo().homedir
                 switch (type) {
                     case 'SDK':
-                        filePath = `${userhome}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${name}`;
+                        filePath = `${os.userInfo().homedir}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${name}`;
                         break;
                     case 'MelonMods':
                         filePath = `${boneLabPathAbsolute.replace('BONELAB_Steam_Windows64.exe', '\\Mods\\')}${name}`;
@@ -246,14 +243,13 @@ function startDownload(event) {
                         console.log('File ' + name + ' already exists and has the same hash');
                         downloadedSize += size;
                         updateProgress();
-                        var userHome = os.userInfo().homedir
                         // if it's a SDK type, check if a corresponding folder exists in the Mods folder, if not, uncompressed it
-                        if (type === 'SDK' && !fs.existsSync(`${userhome}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${name.replace('.tar', '')}`)) {
+                        if (type === 'SDK' && !fs.existsSync(`${os.userInfo().homedir}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${name.replace('.tar', '')}`)) {
                             console.log('Uncompressing ' + name);
-                            fs.createReadStream(filePath).pipe(tar.extract(`${userhome}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${name.replace('.tar', '')}`))
+                            fs.createReadStream(filePath).pipe(tar.extract(`${os.userInfo().homedir}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${name.replace('.tar', '')}`))
                             uncompressedFiles++;
                             updateUnpackProgress();
-                        } else if (type === 'SDK' && fs.existsSync(`${userhome}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${name.replace('.tar', '')}`)) {
+                        } else if (type === 'SDK' && fs.existsSync(`${os.userInfo().homedir}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${name.replace('.tar', '')}`)) {
                             uncompressedFiles++;
                             updateUnpackProgress();
                         }
@@ -269,11 +265,10 @@ function startDownload(event) {
             const downloadFile = async (file, type) => {
                 let url = '';
                 let filepath = '';
-                var userHome = os.userInfo().homedir
                 switch (type) {
                     case 'SDK':
                         url = SDK_URL + file.name;
-                        filePath = `${userhome}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${file.name}`;
+                        filePath = `${os.userInfo().homedir}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${file.name}`;
                         break;
                     case 'MelonMods':
                         url = MelonMods_URL + file.name;
@@ -303,11 +298,11 @@ function startDownload(event) {
 
                 if (type === 'SDK') {
                     // if target folder already exists, remove it and its contents
-                    if (fs.existsSync(`${userhome}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${file.name.replace('.tar', '')}`)) {
-                        fs.rmdirSync(`${userhome}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${file.name.replace('.tar', '')}`, { recursive: true });
+                    if (fs.existsSync(`${os.userInfo().homedir}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${file.name.replace('.tar', '')}`)) {
+                        fs.rmdirSync(`${os.userInfo().homedir}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${file.name.replace('.tar', '')}`, { recursive: true });
                     }
                     console.log('Uncompressing ' + file.name);
-                    fs.createReadStream(filePath).pipe(tar.extract(`${userhome}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${file.name.replace('.tar', '')}`))
+                    fs.createReadStream(filePath).pipe(tar.extract(`${os.userInfo().homedir}\\AppData\\LocalLow\\Stress Level Zero\\BONELAB\\Mods\\${file.name.replace('.tar', '')}`))
                     uncompressedFiles++;
                     updateUnpackProgress();
                 }
